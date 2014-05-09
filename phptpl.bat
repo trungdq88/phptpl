@@ -1,11 +1,16 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-set projectPath=%1
+if [%1]==[create] call :Create %*
+if [%1]==[build] call :Build %*
+goto End
+
+:Build
+set projectPath=%2
 set configFile=%projectPath%\.tpl
 
 if not exist %configFile% (
-    echo Not a PHPTPL project root.
+    echo %projectPath% is not a PHPTPL project root.
     exit /b
 )
 echo --------------------------------------------------------------------------
@@ -43,3 +48,51 @@ for /r %%i in (%srcPath%\*.php) do (
 echo --------------------------------------------------------------------------
 echo Complete!
 echo Dist: %cd%\%distPath%
+exit /b
+
+:Create
+set projectPath=%2
+
+:: Validate
+if exist %projectPath% (
+    echo %projectPath% is not empty
+    exit /b
+)
+if [%projectPath%]==[] (
+    echo Please enter project name: "phptpl create project-name"
+    exit /b
+)
+
+:: Create project structure
+echo Creating dirs ^& files...
+mkdir %projectPath%
+mkdir %projectPath%\src
+mkdir %projectPath%\src\img
+mkdir %projectPath%\src\css
+mkdir %projectPath%\src\js
+mkdir %projectPath%\src\font
+mkdir %projectPath%\dist
+
+:: Write config file
+echo PHP Template Engine 1.0. trungdq88@gmail.com > %projectPath%\.tpl
+
+:: Default index.php
+echo ^<^?php >> %projectPath%\src\index.php
+echo include_once 'header.inc.php'; >> %projectPath%\src\index.php
+echo ^?^> >> %projectPath%\src\index.php
+echo Hello world! >> %projectPath%\src\index.php
+echo ^<^?php >> %projectPath%\src\index.php
+echo include_once 'footer.inc.php'; >> %projectPath%\src\index.php
+echo ^?^> >> %projectPath%\src\index.php
+
+:: Default header.inc.php
+echo header here > %projectPath%\src\header.inc.php
+
+:: Default footer.inc.php
+echo footer here > %projectPath%\src\footer.inc.php
+
+call :Build %*
+
+exit /b
+
+:End
