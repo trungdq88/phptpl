@@ -55,7 +55,7 @@ set projectPath=%2
 
 :: Validate
 if exist %projectPath% (
-    echo %projectPath% is not empty
+    echo %projectPath% directory is not empty
     exit /b
 )
 if [%projectPath%]==[] (
@@ -76,6 +76,10 @@ mkdir %projectPath%\dist
 :: Write config file
 echo PHP Template Engine 1.0. trungdq88@gmail.com > %projectPath%\.tpl
 
+:: Other files
+echo. > %projectPath%\src\css\style.css
+echo. > %projectPath%\src\js\plugins.js
+
 :: Default index.php
 echo ^<^?php >> %projectPath%\src\index.php
 echo include_once 'header.inc.php'; >> %projectPath%\src\index.php
@@ -86,10 +90,21 @@ echo include_once 'footer.inc.php'; >> %projectPath%\src\index.php
 echo ^?^> >> %projectPath%\src\index.php
 
 :: Default header.inc.php
-echo header here > %projectPath%\src\header.inc.php
+echo ^<!DOCTYPE html^> >> %projectPath%\src\header.inc.php
+echo ^<html lang="en"^> >> %projectPath%\src\header.inc.php
+echo ^<head^> >> %projectPath%\src\header.inc.php
+echo     ^<meta charset="utf-8"^> >> %projectPath%\src\header.inc.php
+echo     ^<meta http-equiv="X-UA-Compatible" content="IE=edge"^> >> %projectPath%\src\header.inc.php
+echo     ^<link rel="shortcut icon" href="img/favicon.ico"^> >> %projectPath%\src\header.inc.php
+echo     ^<title^>PHP Template^</title^> >> %projectPath%\src\header.inc.php
+echo     ^<link rel="stylesheet" type="text/css" href="css/style.css"/^> >> %projectPath%\src\header.inc.php
+echo     ^<script src="js/plugins.js"^>^</script^> >> %projectPath%\src\header.inc.php
+echo ^</head^> >> %projectPath%\src\header.inc.php
+echo ^<body^> >> %projectPath%\src\header.inc.php
 
 :: Default footer.inc.php
-echo footer here > %projectPath%\src\footer.inc.php
+echo ^</body^> >> %projectPath%\src\footer.inc.php
+echo ^</html^> >> %projectPath%\src\footer.inc.php
 
 call :Build %*
 
