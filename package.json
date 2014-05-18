@@ -1,0 +1,35 @@
+{
+  "name": "phptpl",
+  "version": "1.0.5",
+  "description": "PHP Template Engine for front-end developer",
+  "main": "phptpl.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "ncp": "~0.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "phptpl.js test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trungdq88/phptpl"
+  },
+  "bin": {
+    "phptpl": "./bin/phptpl.js"
+  },
+  "keywords": [
+    "phptpl",
+    "php",
+    "template",
+    "html"
+  ],
+  "author": "Dinh Quang Trung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trungdq88/phptpl/issues"
+  },
+  "homepage": "https://github.com/trungdq88/phptpl"
+}

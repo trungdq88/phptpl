@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 var fs = require('fs');
 var ncp = require('ncp').ncp;
@@ -26,19 +27,15 @@ utils.deleteFolderRecursive = function(path) {
 
 var args = process.argv.splice(2);
 
-var command = args[0];
-var projectPath = args[1];
-
-if (!projectPath) {
-	console.log('Please provide project path.');
-	return;
-}
+var command = args[0] || "";
+var projectPath = (process.cwd().match(/^\//) ? process.cwd()  + '/' : '')  + (args[1] || "");
 
 // Format path with ending slash
 projectPath = projectPath.replace(/\/$/,'/') + '/';
 
 var srcPath = projectPath + 'src';
 var distPath = projectPath + 'dist';
+var templatePath = __dirname + '/../template';
 
 switch(command) {
 	case 'create': create(); break;
@@ -46,7 +43,16 @@ switch(command) {
 }
 
 function create() {
-
+	if (fs.existsSync(projectPath)) {
+	    console.log(projectPath + ' is not empty!');
+	    return;
+	}
+	ncp(templatePath, projectPath, function (err) {
+		if (err) {
+			return console.error(err);
+		}
+		console.log('PHPTPL project created: ' + projectPath);
+	});
 }
 
 function build() {
