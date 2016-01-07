@@ -3,8 +3,19 @@ phptpl
 
 Static HTML template engine for template developer
 
-How to run
+Install
+= 
+
+    npm install phptpl
+
+Start a project
 =
 
-    > phptpl create example
-    > phptpl build example
+    phptpl create example
+    
+Use your favorite PHP web server to preview.
+
+Build the html files:
+    
+    phptpl build example
+
