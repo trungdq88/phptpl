@@ -6,6 +6,8 @@ Static HTML template engine for template developer
 Install
 = 
 
+**Make sure you have PHP installed** in your `$PATH` first. Then run:
+
     npm install -g phptpl
 
 Start a project
