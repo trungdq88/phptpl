@@ -6,7 +6,7 @@ Static HTML template engine for template developer
 Install
 = 
 
-    npm install phptpl
+    npm install -g phptpl
 
 Start a project
 =
