@@ -3,7 +3,7 @@
 var fs = require('fs');
 var ncp = require('ncp').ncp;
 	ncp.limit = 16;
-var sys = require('sys')
+var sys = require('util')
 var exec = require('child_process').exec;
 
 //////// Utils
