@@ -38,6 +38,9 @@ Project Structure
 
 
 Build the html files:
+=
+
+Navigate to project directory and run:
     
-    phptpl build example
+    phptpl build
 
